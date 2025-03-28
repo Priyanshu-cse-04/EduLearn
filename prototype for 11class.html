@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate EduLearn Platform</title>
+    <style>
+        /* === CSS Variables === */
+        :root {
+            --primary: #2563eb;
+            --secondary: #f59e0b;
+            --background: #ffffff;
+            --text: #1e293b;
+            --card-bg: #f8fafc;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --background: #0f172a;
+            --text: #f8fafc;
+            --card-bg: #1e293b;
+            --shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.1);
+        }
+
+        /* === Base Styles === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+
+        /* === Header Styles === */
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* === Main Content === */
+        main {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--primary), #60a5fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text);
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* === Stream Selector === */
+        .stream-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stream-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .stream-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary);
+        }
+
+        .stream-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* === Course Grid === */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .course-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 1rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .course-card:hover::before {
+            left: 100%;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: var(--progress);
+            transition: width 0.6s ease;
+        }
+
+        .enroll-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .enroll-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* === Dark Mode Toggle === */
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        /* === Responsive Design === */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .stream-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+    
+    <header>
+        <nav>
+            <div class="logo">EduLearn Pro</div>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link">Home</a></li>
+                <li><a href="#" class="nav-link">Courses</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Master 11th Grade Subjects</h1>
+            <p>Interactive learning experience with real-time progress tracking and expert guidance</p>
+        </section>
+
+        <section class="stream-grid">
+            <div class="stream-card" onclick="loadCourses('arts')">
+                <div class="stream-icon">🎨</div>
+                <h3>Arts Stream</h3>
+                <p>Explore humanities and social sciences</p>
+            </div>
+            
+            <div class="stream-card" onclick="loadCourses('commerce')">
+                <div class="stream-icon">💼</div>
+                <h3>Commerce Stream</h3>
+                <p>Master business and finance</p>
+            </div>
+            
+            <div class="stream-card" onclick="loadCourses('science')">
+                <div class="stream-icon">🔬</div>
+                <h3>Science Stream</h3>
+                <p>Dive into technology and research</p>
+            </div>
+        </section>
+
+        <section class="course-grid" id="courseContainer">
+            <!-- Dynamic course cards will be inserted here -->
+        </section>
+    </main>
+
+    <script>
+        // Theme Management
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Course Loading System
+        const courses = {
+            arts: [
+                { title: "History Fundamentals", progress: "45%" },
+                { title: "Political Science Basics", progress: "30%" },
+                { title: "Sociology Concepts", progress: "60%" }
+            ],
+            commerce: [
+                { title: "Accountancy Mastery", progress: "75%" },
+                { title: "Business Studies", progress: "50%" },
+                { title: "Economic Theories", progress: "65%" }
+            ],
+            science: [
+                { title: "Advanced Physics", progress: "80%" },
+                { title: "Chemistry Lab", progress: "55%" },
+                { title: "Biology Essentials", progress: "40%" }
+            ]
+        };
+
+        function loadCourses(stream) {
+            const container = document.getElementById('courseContainer');
+            container.innerHTML = courses[stream].map(course => `
+                <div class="course-card">
+                    <h3>${course.title}</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="--progress: ${course.progress}"></div>
+                    </div>
+                    <button class="enroll-btn">Start Learning</button>
+                </div>
+            `).join('');
+        }
+
+        // Initial Load
+        loadCourses('arts');
+    </script>
+</body>
+</html>

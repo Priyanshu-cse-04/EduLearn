@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn - 11th Grade Physical Education</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        header {
+        position: relative;
+        padding: 1.5rem 2rem;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: white;
+        text-decoration: none;
+        font-size: 1.75rem;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .brand-logo {
+        width: 45px;
+        height: 45px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 1.25rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 1rem;
+        margin-left: auto;
+    }
+
+    @media (max-width: 768px) {
+        .header {
+            flex-direction: column;
+            gap: 1.5rem;
+            padding: 1.5rem 1rem;
+        }
+        
+        .brand {
+            position: static;
+            transform: none;
+            left: auto;
+            font-size: 1.5rem;
+        }
+        
+        .nav-links {
+            width: 100%;
+            justify-content: flex-end;
+        }
+    }
+
+        /* Footer Styles */
+        .footer {
+            background: var(--dark);
+            color: rgb(247, 247, 247);
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+            background: linear-gradient(to top, #1070cf 50%, transparent 100%);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-link {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+        :root {
+            --primary: #2563eb;
+            --secondary: #059669;
+            --accent: #f59e0b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --text: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: linear-gradient(-45deg, #c9edf179, #89daff, #acdbfc, #b6ffff63);
+            background-size: 400% 400%;
+            animation: gradientBG 6s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 50% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Header Styles */
+        .header {
+            background: var(--primary);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-button {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-button:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-1px);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Option Buttons */
+        .option-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .main-button {
+            padding: 2rem;
+            background: white;
+            border-radius: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        .main-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+        }
+
+        .button-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .button-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+
+        .button-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .button-description {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            margin-top: 2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        /* Card Styles */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 2rem;
+            transform: rotate(45deg);
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .card-title {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .card-subtitle {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .card-stats {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-item {
+            flex: 1;
+            text-align: center;
+            padding: 0.8rem;
+            background: var(--light);
+            border-radius: 8px;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .card-button {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .card-button:hover {
+            background: #1e4edd;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            .option-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .main-button {
+                padding: 1.5rem;
+            }
+
+            .button-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="brand">
+            <div class="brand-logo">EL</div>
+            EduLearn
+        </a>
+        <div class="nav-links">
+            <a href="mainpage.html" class="nav-button">🏠 Home</a>
+            <a href="ACS 11.html" class="nav-button">← Back to 11th Grade</a>
+        </div>
+        </header>
+        
+            <main class="main-content">
+                <div class="option-buttons">
+                    <button class="main-button" onclick="showContent('live')">
+                        <div class="button-content">
+                            <span class="button-icon">🎥</span>
+                            <h2 class="button-title">Live Learning</h2>
+                            <p class="button-description">Interactive sessions with Physical Education experts. Free of cost</p>
+                        </div>
+                    </button>
+            
+                    <button class="main-button" onclick="showContent('lectures')">
+                        <div class="button-content">
+                            <span class="button-icon">📚</span>
+                            <h2 class="button-title">Pre-Recorded Lectures</h2>
+                            <p class="button-description">Learn about fitness, sports, and health sciences</p>
+                        </div>
+                    </button>
+                </div>
+            
+                <div id="live" class="content-section">
+                    <h2 class="section-title">Physical Education Experts (Lowest Price First)</h2>
+                    <div class="cards-grid" id="tutors-container"></div>
+                </div>
+            
+                <div id="lectures" class="content-section">
+                    <h2 class="section-title">Physical Education Lessons</h2>
+                    <div class="cards-grid" id="lectures-container"></div>
+                </div>
+            </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>EduLearn</h3>
+                <p>Empowering learners through accessible education</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <div class="footer-links">
+                    <a href="about.html" class="footer-link">About Us</a>
+                    <a href="#" class="footer-link">Careers</a>
+                    <a href="#" class="footer-link">Blog</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Contact Us</a>
+                    <a href="#" class="footer-link">FAQ</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2024 EduLearn. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced Sample Data
+        const tutors = [
+        { 
+            name: "Dr. Rahul Singh", 
+            price: 0, 
+            rating: "4.9", 
+            subjects: ["Sports Science", "Fitness Training"],
+            image: "pe1.jpeg",
+            availability: "Available Now"
+        },
+        { 
+            name: "Neha Verma", 
+            price: 0, 
+            rating: "4.8", 
+            subjects: ["Yoga", "Nutrition"],
+            image: "pe2.jpeg",
+            availability: "Available Now"
+        },
+        { 
+            name: "Amit Khanna", 
+            price: 0, 
+            rating: "4.7", 
+            subjects: ["Athletics", "Sports Psychology"],
+            image: "pe2.jpeg",
+            availability: "Available Tomorrow"
+        }
+    ];
+
+    const lectures = [
+        { 
+            topic: "Fundamentals of Fitness", 
+            tutor: "Dr. Rahul Singh", 
+            duration: "20 mins",
+            rating: "4.9",
+            thumbnail: "pe1.jpeg",
+            expertise: "PhD in Sports Science"
+        },
+        { 
+            topic: "Yoga for Beginners", 
+            tutor: "Neha Verma", 
+            duration: "25 mins",
+            rating: "4.8",
+            thumbnail: "pe2.jpeg",
+            expertise: "Certified Yoga Instructor"
+        },
+        { 
+            topic: "Understanding Sports Psychology", 
+            tutor: "Amit Khanna", 
+            duration: "30 mins",
+            rating: "4.7",
+            thumbnail: "pe1.jpeg",
+            expertise: "Expert in Sports Psychology"
+        }
+    ];
+
+    function showContent(type) {
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.style.display = 'none';
+        });
+        const section = document.getElementById(type);
+        section.style.display = 'block';
+        type === 'live' ? renderTutors() : renderLectures();
+    }
+
+    function renderTutors() {
+        const container = document.getElementById('tutors-container');
+        container.innerHTML = tutors
+            .map(tutor => `
+                <div class="card">
+                    ${tutor.availability === 'Available Now' ? `<div class="card-badge">Live Now</div>` : ''}
+                    <div class="card-header">
+                        <img src="${tutor.image}" class="card-avatar" alt="${tutor.name}" loading="lazy">
+                        <div>
+                            <h3 class="card-title">${tutor.name}</h3>
+                            <p class="card-subtitle">${tutor.availability}</p>
+                        </div>
+                    </div>
+                    <div class="card-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">Free</span>
+                            <span class="stat-label">per hour</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">★${tutor.rating}</span>
+                            <span class="stat-label">rating</span>
+                        </div>
+                    </div>
+                    <button class="card-button" onclick="startSession('${tutor.name}')">Book Session</button>
+                </div>
+            `).join('');
+    }
+
+    function renderLectures() {
+        const container = document.getElementById('lectures-container');
+        container.innerHTML = lectures.map(lecture => `
+            <div class="card">
+                <div class="card-header">
+                    <img src="${lecture.thumbnail}" class="card-avatar" alt="${lecture.topic}" loading="lazy">
+                    <div>
+                        <h3 class="card-title">${lecture.topic}</h3>
+                        <p class="card-subtitle">by ${lecture.tutor}</p>
+                    </div>
+                </div>
+                <div class="card-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">${lecture.duration}</span>
+                        <span class="stat-label">Duration</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">★${lecture.rating}</span>
+                        <span class="stat-label">Rating</span>
+                    </div>
+                </div>
+                <button class="card-button" onclick="playLecture('${lecture.topic}')">Watch Now</button>
+            </div>
+        `).join('');
+    }
+
+        function startSession(tutorName) {
+            // Enhanced connection animation
+            const btn = event.currentTarget;
+            btn.innerHTML = `<div class="loader"></div> Connecting...`;
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = `Book Session`;
+                btn.disabled = false;
+                alert(`Connected to ${tutorName}! Starting session...`);
+            }, 1500);
+        }
+
+        function playLecture(title) {
+            const btn = event.currentTarget;
+            btn.innerHTML = `▶️ Loading...`;
+            setTimeout(() => {
+                btn.innerHTML = `Continue Watching`;
+                alert(`Now playing: ${title}`);
+            }, 1000);
+        }
+
+        // Initial render
+        renderTutors();
+    </script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor Dashboard | EduLearn</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #0073e6;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+            position: relative;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            left: -250px; /* Initially hidden */
+            top: 0;
+            background: #2c3e50;
+            color: white;
+            padding-top: 60px;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .sidebar a:hover {
+            background: #0073e6;
+        }
+
+        /* Sidebar Open */
+        .sidebar.open {
+            transform: translateX(250px);
+        }
+
+        /* Toggle Button */
+        .menu-btn {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+        }
+
+        /* Main Content */
+        .content {
+            margin-left: 0;
+            padding: 20px;
+            transition: margin-left 0.4s ease-in-out;
+        }
+
+        .content.shift {
+            margin-left: 260px;
+        }
+
+        /* Course Management Section */
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Hide all sections by default */
+        .section {
+            display: none;
+        }
+
+        /* Show active section */
+        .active {
+            display: block;
+        }
+
+        /* Button Styling */
+        .btn {
+            background: #0073e6;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #005bb5;
+        }
+
+
+        /* Course List Styling */
+#course-list {
+    list-style: none;
+    padding: 0;
+}
+
+#course-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.course-item {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between text and buttons */
+}
+
+/* Buttons inside the course list */
+.btn {
+    padding: 6px 10px;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+        Tutor Dashboard - EduLearn
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="#" onclick="showSection('dashboard')">🏠 Dashboard</a>
+        <a href="#" onclick="showSection('courses')">📚 My Courses</a>
+        <a href="#">📢 Announcements</a>
+        <a href="#">💬 Student Messages</a>
+        <a href="#">📊 Earnings</a>
+        <a href="#">⚙️ Settings</a>
+        <a href="index.html">🔙 Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content" id="content">
+
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="section active">
+            <h2>Welcome to the Tutor Dashboard</h2>
+            <p>Manage your courses, view student messages, and track earnings.</p>
+        </div>
+
+        <!-- Courses Section -->
+        <div id="courses" class="section">
+            <div class="card">
+                <h2>📚 Manage Your Courses</h2>
+                <button class="btn" onclick="addCourse()">+ Add Course</button>
+                <ul id="course-list">
+                    <li>Mathematics 101 <button class="btn">Edit</button> <button class="btn">Delete</button></li>
+                    <li>Physics for Beginners <button class="btn">Edit</button> <button class="btn">Delete</button></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            let sidebar = document.getElementById("sidebar");
+            let content = document.getElementById("content");
+
+            if (sidebar.classList.contains("open")) {
+                sidebar.classList.remove("open");
+                content.classList.remove("shift");
+            } else {
+                sidebar.classList.add("open");
+                content.classList.add("shift");
+            }
+        }
+
+        function showSection(sectionId) {
+            let sections = document.querySelectorAll(".section");
+            sections.forEach(section => section.classList.remove("active"));
+            document.getElementById(sectionId).classList.add("active");
+        }
+
+        function addCourse() {
+            let courseName = prompt("Enter the course name:");
+            if (courseName) {
+                let courseList = document.getElementById("course-list");
+                let newCourse = document.createElement("li");
+                newCourse.innerHTML = `${courseName} <button class="btn">Edit</button> <button class="btn">Delete</button>`;
+                courseList.appendChild(newCourse);
+            }
+        }
+    </script>
+
+</body>
+</html>

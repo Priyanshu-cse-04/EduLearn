@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn Platform</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            background: #0073e6;
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-button {
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.9);
+            color: #0073e6;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: white;
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Process Section */
+        #process {
+            text-align: center;
+            padding: 100px 20px 60px;
+            background: #ffffff;
+        }
+
+        #process h2 {
+            color: #0073e6;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .process-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 280px;
+            transition: transform 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+        }
+
+        .process-step h3 {
+            color: #0073e6;
+            font-size: 1.4rem;
+            margin: 15px 0;
+        }
+
+        .process-step p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #0073e6;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            font-size: 1.1rem;
+            background: linear-gradient(to top, #2c3e50 20%, transparent 100%);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #0073e6;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0,115,230,0.4);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            background: #005bb5;
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                padding: 10px 0;
+            }
+            
+            .nav-button {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+            
+            #process {
+                padding: 80px 20px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="mainpage.html" class="nav-button">Home</a>
+            <a href="about.html" class="nav-button">Back to Page</a>
+        </div>
+    </header>
+
+    <!-- Process Section -->
+    <section id="process">
+        <h2>Steps in the EduLearn Process</h2>
+        <div class="process-container">
+            <div class="process-step">
+                <h3>User Registration & Login</h3>
+                <p>Students & teachers sign up and authenticate.</p>
+            </div>
+            <div class="process-step">
+                <h3>Course Selection & Learning</h3>
+                <p>Students browse and enroll in courses. Teachers upload content.</p>
+            </div>
+            <div class="process-step">
+                <h3>Assessments & Feedback</h3>
+                <p>Students complete assessments. Teachers review and provide feedback.</p>
+            </div>
+            <div class="process-step">
+                <h3>System Administration</h3>
+                <p>Admin ensures smooth functioning of the platform.</p>
+            </div>
+            <div class="process-step">
+                <h3>User Engagement & Reporting</h3>
+                <p>System tracks progress and generates reports.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        2025 EduLearn | Empowering Digital Education
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</div>
+
+    <script>
+        // Scroll to Top Functionality
+        window.addEventListener('scroll', () => {
+            const scrollButton = document.querySelector('.scroll-top');
+            scrollButton.classList.toggle('visible', window.scrollY > 300);
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

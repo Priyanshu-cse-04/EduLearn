@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Enroll - EduLearn</title>
+    <style>
+        :root {
+            --primary: #0073e6;
+            --secondary: #ff6b6b;
+            --accent: #4ecdc4;
+            --dark: #2d3436;
+            --light: #c7e3ff;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Enhanced Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), #005bb5);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .nav-button {
+            background: rgba(255,255,255,0.9);
+            color: var(--primary);
+            padding: 0.8rem 1.5rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: rgb(250, 250, 250);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 0 2rem;
+        }
+
+        .section {
+            background: rgb(165, 210, 255);
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Steps Section */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .step-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            border-left: 5px solid var(--primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 4rem;
+            color: rgba(0,115,230,0.1);
+            font-weight: bold;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgb(0, 254, 250);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(151, 154, 204, 0.527);
+            padding: 2rem;
+            border-radius: 1rem;
+            border-top: 4px solid var(--accent);
+            transition: all 0.3s ease;
+            text-align: left;s
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(145deg, #76b7c4, #2187ee);
+        }
+
+        /* Pricing Section */
+        .pricing-highlight {
+            background: linear-gradient(135deg, var(--primary), #005bb5);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-highlight::after {
+            content: "💸 Affordable";
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background: var(--secondary);
+            padding: 1rem 2rem;
+            transform: rotate(45deg);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            background: linear-gradient(to top, #2c3e50 20%, transparent 100%);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .nav-button {
+                width: max-content;
+                margin: 0 auto;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="mainpage.html" class="nav-button">🏠 Home</a>
+            <h1>How to Enroll at EduLearn</h1>
+            <a href="usecase.html" class="nav-button">🔙 Use Cases</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="section">
+            <h2>Simple Enrollment Process</h2>
+            <div class="steps-grid">
+                <div class="step-card" data-step="01">
+                    <h3>Create Account</h3>
+                    <p>Quick registration with email or social media</p>
+                </div>
+                <div class="step-card" data-step="02">
+                    <h3>Explore Courses</h3>
+                    <p>Browse through 1000+ courses in various categories</p>
+                </div>
+                <div class="step-card" data-step="03">
+                    <h3>Select Program</h3>
+                    <p>Choose your desired learning path</p>
+                </div>
+                <div class="step-card" data-step="04">
+                    <h3>Secure Payment</h3>
+                    <p>Multiple safe payment options available</p>
+                </div>
+                <div class="step-card" data-step="05">
+                    <h3>Start Learning</h3>
+                    <p>Instant access to course materials</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section pricing-highlight">
+            <h2>Affordable Learning for All</h2>
+            <p>We offer quality education at <strong>80% lower cost</strong> than traditional institutions through our optimized digital platform.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🎓 Free Resources</h3>
+                    <p>Access to open courseware and community resources</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🤝 Peer Support</h3>
+                    <p>24/7 access to student discussion forums</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📈 Progress Tracking</h3>
+                    <p>Interactive dashboards to monitor your learning journey</p>
+                </div>
+            </div>
+        </section>
+
+        <a href="mainpage.html" class="nav-button">← Back to Homepage</a>
+    </div>
+
+    <footer>
+        <p>2025 EduLearn | Empowering Digital Education</p>
+    </footer>
+
+    <div class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</div>
+
+    <script>
+        // Scroll to Top Functionality
+        window.addEventListener('scroll', () => {
+            const scrollButton = document.querySelector('.scroll-top');
+            scrollButton.classList.toggle('visible', window.scrollY > 300);
+        });
+
+        // Section Animation Trigger
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

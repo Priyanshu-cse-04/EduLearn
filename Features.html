@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn Features</title>
+    <style>
+        /* Header Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+        }
+        header {
+            background: #0073e6;
+            color: white;
+            padding: 20px ;
+            position: fixed;
+            width: 100%;
+            font-size: 1.25em;;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 20px;
+            height: 60px;  /* Added fixed height */
+        }
+
+        .home-button {
+            position: absolute;
+            left: 20px;
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.9);
+            color: #0073e6;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        /* New Back Button Styles */
+        .back-button {
+            position: absolute;
+            right: 20px;
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.9);
+            color: #0073e6;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .home-button:hover, .back-button:hover {
+            background: white;
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+            font-size: 1.5rem;
+            white-space: nowrap;
+        }
+
+        /* Features Section */
+        #features {
+            padding: 120px 20px 80px;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        #features h2 {
+            text-align: center;
+            color: #0073e6;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            padding: 0 20px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            color: #0073e6;
+            margin: 15px 0;
+            font-size: 1.4rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            font-size: 1.1rem;
+            position: relative;
+            background: linear-gradient(to top, #2c3e50 20%, transparent 100%);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #0073e6;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0,115,230,0.4);
+            border: none;
+            font-size: 1.5rem;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            background: #005bb5;
+            transform: scale(1.1);
+        }
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 1.2rem;
+                max-width: 50%;
+                text-align: center;
+            }
+            .home-button, .back-button {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+        }
+    
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="mainpage.html" class="home-button">Home</a>
+            <h1 class="header-title">EduLearn Features</h1>
+            <a href="usecase.html" class="back-button">Back to Use Cases</a>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features">
+        <h2>Key Platform Features</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>Course Marketplace</h3>
+                <p>Browse thousands of courses across multiple disciplines with advanced filtering options</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎥</div>
+                <h3>Live Classes</h3>
+                <p>Interactive virtual classrooms with real-time whiteboarding and Q&A sessions</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Progress Analytics</h3>
+                <p>Detailed learning analytics with competency mapping and skill gap analysis</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>Smart Recommendations</h3>
+                <p>Machine learning algorithms suggest personalized learning paths</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>Verified Certificates</h3>
+                <p>Blockchain-verified credentials upon course completion</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Mobile App</h3>
+                <p>Downloadable app with offline access to course materials</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Group Projects</h3>
+                <p>Real-time collaborative workspace with version control</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">♿</div>
+                <h3>Accessibility Mode</h3>
+                <p>Screen reader support and adjustable content formats</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🛠️</div>
+                <h3>Content Management</h3>
+                <p>Centralized dashboard for course updates and user management</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Learning Community</h3>
+                <p>Discussion forums and peer-to-peer mentoring system</p>
+            </div>
+    
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        2025 EduLearn | Empowering Digital Education
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</div>
+
+    <script>
+        // Scroll to Top Functionality
+        window.addEventListener('scroll', () => {
+            const scrollButton = document.querySelector('.scroll-top');
+            scrollButton.classList.toggle('visible', window.scrollY > 300);
+        });
+
+        // Smooth scroll for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

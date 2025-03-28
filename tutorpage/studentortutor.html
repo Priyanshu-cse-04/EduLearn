@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Role - EduLearn</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(-45deg, #37e8ff79, #89daff, #27a0f6, #f2f3f363);
+            background-size: 400% 400%;
+            animation: gradientBG 6s ease infinite;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 40px;
+        }
+
+        .option {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            width: 220px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .option img {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .option:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .option img:hover {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        .option p {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #fff;
+            margin-top: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Select Your Role</h1>
+    <div class="container">
+        <div class="option" onclick="location.href='../mainpage.html'">
+            <img src="./images/university-student6136.logowik.com.webp" alt="Student">
+            <p>Student</p>
+        </div>
+        
+        <div class="option" onclick="location.href='./tutor.html'">
+            <img src="./images/tutor.webp" alt="Tutor">
+            <p>Tutor</p>
+        </div>
+    </div>
+</body>
+</html>

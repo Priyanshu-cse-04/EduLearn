@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn - Senior High School Courses</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0073e6, #004a99);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .grade-selector {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .grade-btn {
+            background: #ffffff;
+            color: #6c5ce7;
+            border: 2px solid #6c5ce7;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .grade-btn.active {
+            background: #6c5ce7;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .grade-btn:hover {
+            background: #6c5ce7;
+            color: white;
+        }
+
+        .course-heading-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .course-heading {
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin: 0;
+            text-align: left;
+        }
+
+        .sub-heading {
+            color: #666;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .categories {
+            max-width: 1200px;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .category-btn {
+            background: #fff;
+            color: #0073e6;
+            border: 2px solid #0073e6;
+            padding: 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .category-btn.active {
+            background: #0073e6;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .category-btn:hover {
+            background: #0073e6;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,115,230,0.3);
+        }
+
+        .course-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .course-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .course-title {
+            color: #1a1a1a;
+            margin: 10px 0;
+            font-size: 1.4rem;
+        }
+
+        .course-description {
+            color: #666;
+            font-size: 0.95rem;
+            min-height: 60px;
+        }
+
+        .enroll-btn {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .enroll-btn:hover {
+            background: #e68900;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .category-btn {
+                font-size: 1.2rem;
+                padding: 20px;
+            }
+
+            .course-container {
+                grid-template-columns: 1fr;
+            }
+
+            .course-heading {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">EduLearn</div>
+            <ul class="nav-links">
+                <li><a href="mainpage.html">Home</a></li>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="grade-selector">
+            <button class="grade-btn active" onclick="selectGrade('11th')">11th Grade</button>
+            <button class="grade-btn" onclick="selectGrade('12th')">12th Grade</button>
+        </div>
+
+        <div class="course-heading-container">
+            <h1 class="course-heading">📚 Explore Courses</h1>
+            <p class="sub-heading">Select your stream to view available subjects</p>
+        </div>
+        
+        <div class="categories">
+            <button class="category-btn" onclick="selectStream('arts')">🎨 Arts</button>
+            <button class="category-btn" onclick="selectStream('commerce')">💼 Commerce</button>
+            <button class="category-btn" onclick="selectStream('science')">🔬 Science</button>
+        </div>
+        
+        <div id="course-container" class="course-container"></div>
+    </main>
+
+    <script>
+        const courses = {
+            '11th': {
+                'arts': [
+                    { title: "History", icon: "📜", description: "Explore world civilizations and historical events." },
+                    { title: "Political Science", icon: "🏛️", description: "Study political systems and governance." },
+                    { title: "Sociology", icon: "👥", description: "Understand human social relationships." },
+                    { title: "Economics", icon: "💹", description: "Learn about production and consumption." },
+                    { title: "Geography", icon: "🌍", description: "Study Earth's landscapes and environments." },
+                    { title: "Psychology", icon: "🧠", description: "Explore human behavior and mind." }
+                ],
+                'commerce': [
+                    { title: "Accountancy", icon: "📊", description: "Master financial accounting principles." },
+                    { title: "Business Studies", icon: "💼", description: "Learn business operations." },
+                    { title: "Economics", icon: "💹", description: "Study market systems and policies." },
+                    { title: "Mathematics", icon: "🧮", description: "Develop quantitative skills." },
+                    { title: "English", icon: "📖", description: "Enhance communication skills." },
+                    { title: "Physical Education", icon: "🏃", description: "Sports science and fitness." }
+                ],
+                'science': [
+                    { title: "Physics", icon: "⚛️", description: "Discover laws of matter and energy." },
+                    { title: "Chemistry", icon: "🧪", description: "Study matter composition." },
+                    { title: "Biology", icon: "🧬", description: "Explore living organisms." },
+                    { title: "Mathematics", icon: "📐", description: "Advanced problem-solving." },
+                    { title: "Computer Science", icon: "💻", description: "Learn programming basics." },
+                    { title: "English", icon: "📚", description: "Literature and composition." }
+                ]
+            },
+            '12th': {
+                'arts': [
+                    { title: "Modern History", icon: "📜", description: "20th century global developments." },
+                    { title: "International Relations", icon: "🌐", description: "Global political dynamics study." },
+                    { title: "Social Anthropology", icon: "👥", description: "Cultural diversity analysis." },
+                    { title: "Macroeconomics", icon: "📈", description: "National economic systems study." },
+                    { title: "Geopolitics", icon: "🗺️", description: "Political geography analysis." },
+                    { title: "Cognitive Psychology", icon: "🧠", description: "Study of mental processes." }
+                ],
+                'commerce': [
+                    { title: "Advanced Accountancy", icon: "📊", description: "Corporate accounting practices." },
+                    { title: "Business Management", icon: "📈", description: "Strategic business planning." },
+                    { title: "Econometrics", icon: "📉", description: "Statistical economic analysis." },
+                    { title: "Financial Mathematics", icon: "🧮", description: "Quantitative finance methods." },
+                    { title: "Business Communication", icon: "📧", description: "Professional communication skills." },
+                    { title: "Entrepreneurship", icon: "🚀", description: "Startup development strategies." }
+                ],
+                'science': [
+                    { title: "Advanced Physics", icon: "⚛️", description: "Quantum mechanics introduction." },
+                    { title: "Organic Chemistry", icon: "🧪", description: "Carbon compounds study." },
+                    { title: "Genetics", icon: "🧬", description: "Heredity and variation analysis." },
+                    { title: "Calculus", icon: "📐", description: "Advanced mathematical concepts." },
+                    { title: "Data Structures", icon: "💻", description: "Algorithm organization methods." },
+                    { title: "Biotechnology", icon: "🧫", description: "Applied biological systems." }
+                ]
+            }
+        };
+
+        let currentGrade = '11th';
+        let currentStream = 'science';
+
+        function selectGrade(grade) {
+            currentGrade = grade;
+            document.querySelectorAll('.grade-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            updateCourses();
+        }
+
+        function selectStream(stream) {
+            currentStream = stream;
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            updateCourses();
+        }
+
+        function updateCourses() {
+            const container = document.getElementById('course-container');
+            container.innerHTML = '';
+            
+            courses[currentGrade][currentStream].forEach(course => {
+                const card = document.createElement('div');
+                card.className = 'course-card';
+                card.innerHTML = `
+                    <div class="course-icon">${course.icon}</div>
+                    <h3 class="course-title">${course.title}</h3>
+                    <p class="course-description">${course.description}</p>
+                    <button class="enroll-btn">Enroll Now</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Initial setup
+        document.querySelector('.grade-btn').classList.add('active');
+        document.querySelector('.category-btn').classList.add('active');
+        updateCourses();
+
+        // Enrollment handler
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('enroll-btn')) {
+                const courseTitle = e.target.closest('.course-card').querySelector('.course-title').textContent;
+                alert(`Successfully enrolled in ${currentGrade} ${courseTitle}!\n\nCheck your dashboard to start learning.`);
+            }
+        });
+    </script>
+</body>
+</html>

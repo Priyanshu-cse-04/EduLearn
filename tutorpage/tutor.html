@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor Dashboard | EduLearn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .menu-btn {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            z-index: 1001; /* Add this to ensure button stays clickable */
+        }
+        /* Add Rupee symbol font support */
+        @font-face {
+            font-family: 'Rupee';
+            src: url('https://cdn.rawgit.com/ananthanand/rupee-font/1c05e23c/Rupee.ttf') format('truetype');
+        }
+        .rupee {
+            font-family: 'Rupee', Arial, sans-serif;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: linear-gradient(-45deg, #01e1ff79, #89daff, #27a0f6, #f2f3f363);
+            background-size: 400% 400%;
+            animation: gradientBG 6s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .navbar {
+            height: 60px;
+            box-sizing: border-box;
+            background: #0073e6;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+            position: relative;
+        }
+        /* Enhanced Sidebar Styles */
+        .sidebar {
+            transform: translateX(-100%);
+            width: 280px;
+            height: calc(100vh - 60px);
+            position: fixed;
+            left: -280px; /* Start completely hidden */
+            top: 60px;
+            background: linear-gradient(195deg, #1a237e, #0d47a1);
+            color: white;
+            padding: 20px 20px 20px;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .sidebar.open ~ .navbar .menu-btn {
+            display: none;
+        }
+        .sidebar.open {
+            z-index: 1002;
+        }
+
+        .sidebar.open {
+            transform: translateX(280px);
+        }
+
+        .sidebar-header {
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .user-info h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .user-info p {
+            margin: 5px 0 0;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .sidebar-menu {
+            overflow-y: hidden;
+            max-height: none; /* Adjust based on content */
+            max-height: calc(100vh - 260px); /* Adjust based on content */
+            margin-bottom: 15px; /* Add spacing before footer */
+        }
+        .sidebar-menu::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome/Safari */
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 12px 16px;
+            margin: 6px 0;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(8px);
+        }
+
+        .sidebar-menu a.active {
+            background: rgba(255, 255, 255, 0.1);
+            font-weight: 500;
+        }
+
+        .sidebar-menu a.active::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 60%;
+            background: #64b5f6;
+            border-radius: 2px;
+        }
+
+        .menu-icon {
+            width: 28px;
+            font-size: 1.1rem;
+            margin-right: 12px;
+        }
+
+        .notification-badge {
+            background: #e53935;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: auto;
+            font-weight: 500;
+        }
+
+        .sidebar-footer {
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 45, 45, 0.1);
+            margin-top: auto;
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center; /* Changed from 'top' */
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+            padding: 12px 20px; /* Increase padding */
+            margin: 0 10px; /* Add horizontal margin */
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .content {
+            padding: 70px;
+            transition: margin-left 0.4s ease-in-out;
+        }
+
+        .content.shift {
+            margin-left: 260px;
+        }
+
+        .section {
+            display: none;
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .section.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn {
+            padding: 8px 12px;
+            font-size: 14px;
+            background: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #005bb5;
+            transform: scale(1.05);
+        }
+
+        .upload-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+
+            /* Settings Section Styling */
+        .settings-form {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .settings-form label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .settings-form input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .settings-form button {
+            width: 100%;
+            padding: 12px;
+            background: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+
+        .settings-form button:hover {
+            background: #005bb5;
+        }
+
+
+        .dashboard-widget {
+        background: white;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .dashboard-widget h3 {
+                color: #0073e6;
+                margin-bottom: 10px;
+            }
+
+            .dashboard-widget ul {
+                list-style: none;
+                padding: 0;
+            }
+
+            .dashboard-widget ul li {
+                background: #f9f9f9;
+                padding: 8px;
+                margin-bottom: 5px;
+                border-radius: 5px;
+            }
+
+            .dashboard-widget table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .dashboard-widget table, .dashboard-widget th, .dashboard-widget td {
+                border: 1px solid #ddd;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .dashboard-widget th {
+                background: #0073e6;
+                color: white;
+            }
+
+            .upload-form select {
+                width: 100%;
+                padding: 10px;
+                margin: 5px 0;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+                background: white;
+            }
+            .earnings-chart {
+            display: flex;
+            justify-content: space-between;
+            height: 200px;
+            align-items: flex-end;
+            margin: 20px 0;
+            }
+
+        .chart-bar {
+            width: 15%;
+            background: #0073e6;
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            transition: height 0.5s ease;
+        }
+
+        .chart-bar-label {
+            position: absolute;
+            bottom: -25px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        .schedule-options {
+        margin: 15px 0;
+        padding: 10px;
+        background: #f5f5f5;
+        border-radius: 8px;
+    }
+    
+    .schedule-options div {
+        margin-top: 10px;
+        display: flex;
+        gap: 20px;
+    }
+    
+    .schedule-options input[type="radio"] {
+        margin-right: 5px;
+    }
+    
+    #scheduleInput {
+        margin: 15px 0;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+        /* Message List Enhancements */
+        .message-list {
+            margin-top: 20px;
+        }
+
+        .message-item {
+            background: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .message-preview {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .message-time {
+            color: #999;
+            font-size: 0.8em;
+        }
+
+        /* Status Indicators */
+        .status-completed {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        /* New Stats Widget */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            color: #0073e6;
+            margin: 10px 0;
+        }
+
+        /* Existing Course Materials Table */
+        .materials-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .materials-table th {
+            background: #f8f9fa;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .sidebar.open {
+                transform: translateX(280px); /* Keep original transform */
+                width: 280px; /* Maintain sidebar width */
+            }
+            
+            .content.shift {
+                margin-left: 0; /* Remove content shift on mobile */
+            }
+            
+            
+        }
+        .close-btn {
+                position: absolute;
+                right: 15px;
+                top: 15px;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+                display: none;
+            }
+
+            .sidebar.open .close-btn {
+                display: block;
+            }
+            .materials-section {
+        margin: 25px 0;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .materials-section h3 {
+            color: #0073e6;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .materials-table td, .materials-table th {
+            padding: 12px;
+            text-align: left;
+        }
+
+        .materials-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .materials-table th {
+            background-color: #0073e6;
+            color: white;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .materials-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        /* Rest of your existing styles remain the same */
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+        Tutor Dashboard - EduLearn
+    </div>
+
+    <!-- Enhanced Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <button class="close-btn" onclick="toggleSidebar()">×</button>
+            <div class="user-profile">
+                <img src="https://i.pravatar.cc/50" class="user-avatar" alt="User Avatar">
+                <div class="user-info">
+                    <h3>Dr. Anika Sharma</h3>
+                    <p>Senior Mathematics Tutor</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-menu">
+            <a href="#dashboardSection" class="active" onclick="showSection('dashboardSection')">
+                <i class="fas fa-home menu-icon"></i>
+                Dashboard
+                <span class="notification-badge">3 New</span>
+            </a>
+            <a href="#coursesSection" onclick="showSection('coursesSection')">
+                <i class="fas fa-book-open menu-icon"></i>
+                My Courses
+                <span class="notification-badge">5 Updates</span>
+            </a>
+            <a href="#goLiveSection" onclick="showSection('goLiveSection')">
+                <i class="fas fa-video menu-icon"></i>
+                Go Live
+            </a>
+            <a href="#messagesSection" onclick="showSection('messagesSection')">
+                <i class="fas fa-comments menu-icon"></i>
+                Messages
+                <span class="notification-badge">2 Unread</span>
+            </a>
+            <a href="#earningsSection" onclick="showSection('earningsSection')">
+                <i class="fas fa-rupee-sign menu-icon"></i>
+                Earnings
+            </a>
+            <a href="#settingsSection" onclick="showSection('settingsSection')">
+                <i class="fas fa-cog menu-icon"></i>
+                Settings
+            </a>
+        </div>
+
+        <div class="sidebar-footer">
+            <a href="../mainpage.html" class="logout-btn">
+                <i class="fas fa-sign-out-alt menu-icon"></i>
+                Logout
+            </a>
+        </div>
+    </div>
+    
+    <div class="content" id="content">
+        <h2>Welcome to the Tutor Dashboard</h2>
+        <p>Manage your courses, view student messages, and track earnings.</p>
+        <div class="section" id="coursesSection">
+            <h2>📚 Course Materials</h2>
+            
+            <!-- Upload Video Form -->
+            <form class="upload-form">
+                <label for="class">Select Class:</label>
+                <select id="class" required>
+                    <option value="" disabled selected>Select Class</option>
+                    <option value="Class 9">Class 9</option>
+                    <option value="Class 10">Class 10</option>
+                    <option value="Class 11">Class 11</option>
+                    <option value="Class 12">Class 12</option>
+                </select>
+        
+                <label for="subject">Select Subject:</label>
+                <select id="subject" required>
+                    <option value="" disabled selected>Select Subject</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Science">Science</option>
+                    <option value="English">English</option>
+                </select>
+        
+                <label for="title">Video Title:</label>
+                <input type="text" id="title" placeholder="Enter video title" required>
+        
+                <label for="video">Upload Video:</label>
+                <input type="file" id="video" accept="video/*" required>
+        
+                <button class="btn" type="submit">Upload Video</button>
+            </form>
+        
+            <!-- Existing Uploaded Videos -->
+            <div class="materials-section">
+                <h3>📼 Uploaded Videos</h3>
+                <table class="materials-table">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Subject</th>
+                            <th>Title</th>
+                            <th>Upload Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Class 10</td>
+                            <td>Mathematics</td>
+                            <td>Introduction to Algebra</td>
+                            <td>2024-03-15</td>
+                            <td>
+                                <button class="btn"><i class="fas fa-edit"></i> Edit</button>
+                                <button class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Class 12</td>
+                            <td>Physics</td>
+                            <td>Quantum Mechanics Basics</td>
+                            <td>2024-03-18</td>
+                            <td>
+                                <button class="btn"><i class="fas fa-edit"></i> Edit</button>
+                                <button class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        
+            <!-- Past Live Sessions -->
+            <div class="materials-section">
+                <h3>🎥 Past Live Sessions</h3>
+                <table class="materials-table">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Duration</th>
+                            <th>Attendance</th>
+                            <th>Recording</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Class 11</td>
+                            <td>Chemistry Live Q&A</td>
+                            <td>2024-03-20</td>
+                            <td>45 mins</td>
+                            <td>35 students</td>
+                            <td>
+                                <button class="btn"><i class="fas fa-play"></i> Watch</button>
+                                <button class="btn"><i class="fas fa-download"></i> Download</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Class 9</td>
+                            <td>Maths Problem Solving</td>
+                            <td>2024-03-22</td>
+                            <td>60 mins</td>
+                            <td>42 students</td>
+                            <td>
+                                <button class="btn"><i class="fas fa-play"></i> Watch</button>
+                                <button class="btn"><i class="fas fa-download"></i> Download</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="section" id="goLiveSection">
+            <h2>🎥 Start Live Class</h2>
+            <form class="upload-form" id="liveForm">
+                <label for="liveClass">Select Class:</label>
+                <select id="liveClass" required>
+                    <option value="" disabled selected>Select Class</option>
+                    <option value="Class 9">Class 9</option>
+                    <option value="Class 10">Class 10</option>
+                    <option value="Class 11">Class 11</option>
+                    <option value="Class 12">Class 12</option>
+                </select>
+        
+                <label for="liveTitle">Class Title:</label>
+                <input type="text" id="liveTitle" placeholder="Enter class title" required>
+        
+                <div class="schedule-options">
+                    <label>Schedule Type:</label>
+                    <div>
+                        <input type="radio" id="instantLive" name="scheduleType" value="instant" checked 
+                               onclick="toggleScheduleInput(false)">
+                        <label for="instantLive">Start Instant Live</label>
+                        
+                        <input type="radio" id="scheduleLive" name="scheduleType" value="scheduled"
+                               onclick="toggleScheduleInput(true)">
+                        <label for="scheduleLive">Schedule Later</label>
+                    </div>
+                </div>
+        
+                <div id="scheduleInput" style="display: none;">
+                    <label for="scheduleTime">Schedule Date & Time:</label>
+                    <input type="datetime-local" id="scheduleTime">
+                </div>
+        
+                <button class="btn" type="submit">Start Class</button>
+            </form>
+        </div>
+        
+        <div class="section show" id="dashboardSection">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div>Total Students</div>
+                    <div class="stat-number">142</div>
+                </div>
+                <div class="stat-item">
+                    <div>Active Courses</div>
+                    <div class="stat-number">8</div>
+                </div>
+                <div class="stat-item">
+                    <div>Completed Hours</div>
+                    <div class="stat-number">96</div>
+                </div>
+                <div class="stat-item">
+                    <div>Rating</div>
+                    <div class="stat-number">4.8★</div>
+                </div>
+            </div>
+            <h2>📌 Dashboard Overview</h2>
+        
+            <div class="dashboard-widget">
+                <h3>🔔 Important Reminders</h3>
+                <ul>
+                    <li>✔️ Grade assignments for Class 10 - Deadline: March 27</li>
+                    <li>✔️ Prepare quiz for Class 12 - Due: March 29</li>
+                    <li>✔️ Meeting with school admin - March 30</li>
+                </ul>
+            </div>
+        
+            <div class="dashboard-widget">
+                <h3>📅 Upcoming Classes</h3>
+                <ul>
+                    <li>📌 Mathematics - March 26, 10:00 AM</li>
+                    <li>📌 Science - March 27, 12:00 PM</li>
+                    <li>📌 English - March 28, 2:00 PM</li>
+                </ul>
+            </div>
+        
+            <div class="dashboard-widget">
+                <h3>📖 Weekly Timetable</h3>
+                <table>
+                    <tr>
+                        <th>Day</th>
+                        <th>Subject</th>
+                        <th>Time</th>
+                    </tr>
+                    <tr>
+                        <td>Monday</td>
+                        <td>Mathematics</td>
+                        <td>10:00 AM - 11:30 AM</td>
+                    </tr>
+                    <tr>
+                        <td>Tuesday</td>
+                        <td>Science</td>
+                        <td>12:00 PM - 1:30 PM</td>
+                    </tr>
+                    <tr>
+                        <td>Wednesday</td>
+                        <td>English</td>
+                        <td>2:00 PM - 3:30 PM</td>
+                    </tr>
+                </table>
+            </div>
+        
+            <div class="dashboard-widget">
+                <h3>📢 Latest Notifications</h3>
+                <ul>
+                    <li>📣 School is organizing an event on April 5</li>
+                    <li>📣 New student enrolled in Class 9</li>
+                    <li>📣 Exam schedule will be released soon</li>
+                </ul>
+            </div>
+        </div>
+        <div class="section" id="coursesSection">
+            <h2>📚 Upload a video</h2>
+            <form class="upload-form">
+                <label for="class">Select Class:</label>
+                <select id="class">
+                    <option value="" disabled selected>Select Class</option>
+                    <option value="Class 9">Class 9</option>
+                    <option value="Class 10">Class 10</option>
+                    <option value="Class 11">Class 11</option>
+                    <option value="Class 12">Class 12</option>
+                </select>
+        
+                <label for="subject">Select Subject:</label>
+                <select id="subject">
+                    <option value="" disabled selected>Select Subject</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Science">Science</option>
+                    <option value="English">English</option>
+                    <option value="Social Studies">Social Studies</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Biology">Biology</option>
+                    <option value="Computer Science">Computer Science</option>
+                </select>
+        
+                <label for="title">Title:</label>
+                <input type="text" id="title" placeholder="Enter video title">
+        
+                <label for="video">Upload Video:</label>
+                <input type="file" id="video" accept="video/*">
+        
+                <button class="btn" type="submit">Upload</button>
+            </form>
+            <table class="materials-table">
+                <tr>
+                    <th>Class</th>
+                    <th>Subject</th>
+                    <th>Title</th>
+                    <th>Actions</th>
+                </tr>
+                <tr>
+                    <td>Class 10</td>
+                    <td>Mathematics</td>
+                    <td>Algebra Basics</td>
+                    <td>
+                        <button class="btn">Edit</button>
+                        <button class="btn">Delete</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+
+        <div class="section" id="messagesSection">
+                <h2>💬 Student Messages <button class="btn">New Message</button></h2>
+                <div class="message-list">
+                    <div class="message-item">
+                        <div>
+                            <div>Rahul Sharma</div>
+                            <div class="message-preview">When will the next assignment be posted...</div>
+                        </div>
+                        <div class="message-time">2h ago</div>
+                    </div>
+                    <!-- ... more messages ... -->
+                </div>
+            </div>
+            <h2>💬 Student Messages</h2>
+            <p>You have no new messages.</p>
+        </div>
+
+        <div class="section" id="earningsSection">
+            <h2>📊 Earnings</h2>
+            <p>Your total earnings: <strong><span class="rupee">₹</span>1,20,000</strong></p>
+            
+            <div class="earnings-chart">
+                <div class="chart-bar" style="height: 30%">
+                    <div class="chart-bar-label">Jan</div>
+                </div>
+                <div class="chart-bar" style="height: 35%">
+                    <div class="chart-bar-label">Feb</div>
+                </div>
+                <div class="chart-bar" style="height: 55%">
+                    <div class="chart-bar-label">Mar</div>
+                </div>
+            </div>
+
+            <div class="dashboard-widget">
+                <h3>💰 Recent Transactions</h3>
+                <table class="dashboard-widget">
+                    <tr>
+                        <td>March 20</td>
+                        <td><span class="rupee">₹</span>10,000</td>
+                        <td><span class="status-completed">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>March 20</td>
+                        <td>₹150</td>
+                        <td>Completed</td>
+                    </tr>
+                    <tr>
+                        <td>March 15</td>
+                        <td>₹200</td>
+                        <td>Pending</td>
+                    </tr>
+                    <tr>
+                        <td>March 10</td>
+                        <td>₹100</td>
+                        <td>Completed</td>
+                    </tr>
+                
+                </table>
+            </div>
+
+            <div class="dashboard-widget">
+                <h3>🏦 Linked Payment Methods</h3>
+                <ul>
+                    <li>✔️ PayPal - Linked</li>
+                    <li>✔️ Bank Transfer - Linked</li>
+                    <li>❌ Credit Card - Not Linked</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+        <div class="section" id="settingsSection">
+            <h2>⚙️ Settings</h2>
+            <form class="settings-form">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" placeholder="Enter your full name">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter your email">
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter new password">
+
+                <label for="phone">Phone Number:</label>
+                <input type="text" id="phone" placeholder="Enter your phone number">
+
+                <label for="bio">Bio:</label>
+                <input type="text" id="bio" placeholder="Write a short bio">
+
+                <button class="btn" type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Rest of your content remains the same -->
+
+    <script>
+        // Enhanced Sidebar Functionality
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+            sidebar.classList.toggle('open');
+            content.classList.toggle('shift');
+            
+            // Force reflow for smooth animation
+            void sidebar.offsetWidth;
+        }
+    
+        function showSection(sectionId) {
+            // Remove active class from all sections and menu items
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('show');
+                section.style.display = 'none';
+            });
+            document.querySelectorAll('.sidebar-menu a').forEach(link => {
+                
+                link.classList.remove('active');
+            });
+    
+            // Add active class to selected section and menu item
+            const activeSection = document.getElementById(sectionId);
+            const activeLink = document.querySelector(`a[href="#${sectionId}"]`);
+            
+            activeSection.style.display = 'block';
+            setTimeout(() => activeSection.classList.add('show'), 10);
+            activeLink.classList.add('active');
+    
+            // Close sidebar on mobile
+            if (window.innerWidth <= 768) {
+                toggleSidebar();
+            }
+        }
+    
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (event) => {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+            if (window.innerWidth <= 768 && 
+                !event.target.closest('.sidebar') && 
+                !event.target.closest('.menu-btn')) {
+                sidebar.classList.remove('open');
+                content.classList.remove('shift');
+            }
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Force close sidebar on initial load
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+            sidebar.classList.remove('open');
+            content.classList.remove('shift');
+        });
+        function toggleScheduleInput(show) {
+        const scheduleInput = document.getElementById('scheduleInput');
+        const scheduleTime = document.getElementById('scheduleTime');
+        scheduleInput.style.display = show ? 'block' : 'none';
+        if (show) scheduleTime.required = true;
+        else scheduleTime.required = false;
+    }
+
+    document.getElementById('liveForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const classSelected = document.getElementById('liveClass').value;
+        const title = document.getElementById('liveTitle').value;
+        const isScheduled = document.getElementById('scheduleLive').checked;
+        const scheduleTime = document.getElementById('scheduleTime').value;
+
+        if (isScheduled && !scheduleTime) {
+            alert('Please select schedule time');
+            return;
+        }
+
+        // Add your live class start logic here
+        if (isScheduled) {
+            alert(`Class "${title}" for ${classSelected} scheduled at ${new Date(scheduleTime).toLocaleString()}`);
+        } else {
+            alert(`Starting instant live class "${title}" for ${classSelected}`);
+        }
+    });
+            
+        // Handle window resize
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn - Learn Anytime, Anywhere</title>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0073e6, #004a99);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Course headings */
+        .course-heading-container {
+            max-width: 1200px;
+            margin: 40px auto 20px;
+            padding: 0 20px;
+        }
+
+        .course-heading {
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin: 0;
+            text-align: left;
+        }
+
+        .sub-heading {
+            color: #666;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        /* Course categories */
+        .categories {
+            max-width: 1200px;
+            margin: 50px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .category-btn {
+            background: #fff;
+            color: #0073e6;
+            border: 2px solid #0073e6;
+            padding: 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .category-btn:hover {
+            background: #0073e6;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,115,230,0.3);
+        }
+
+        .category-btn.active {
+            background: #0073e6;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Course cards */
+        .course-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .course-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .course-title {
+            color: #1a1a1a;
+            margin: 10px 0;
+            font-size: 1.4rem;
+        }
+
+        .course-description {
+            color: #666;
+            font-size: 0.95rem;
+            min-height: 60px;
+        }
+
+        .enroll-btn {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .enroll-btn:hover {
+            background: #e68900;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .category-btn {
+                font-size: 1.2rem;
+                padding: 20px;
+            }
+
+            .course-container {
+                grid-template-columns: 1fr;
+            }
+
+            .course-heading {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">EduLearn</div>
+            <ul class="nav-links">
+                <li><a href="mainpage.html">Home</a></li>
+                <li><a href="mainpage.html">Courses</a></li>
+                <li><a href="about.html">About</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="course-heading-container">
+            <h1 class="course-heading">📚 Explore 11th Grade Courses</h1>
+            <p class="sub-heading">Choose your stream and start your learning journey</p>
+        </div>
+        
+        <div class="categories">
+            <button class="category-btn" onclick="showCourses('arts')">🎨 Arts</button>
+            <button class="category-btn" onclick="showCourses('commerce')">💼 Commerce</button>
+            <button class="category-btn" onclick="showCourses('science')">🔬 Science</button>
+        </div>
+        
+        <div id="course-container" class="course-container"></div>
+    </main>
+
+    <script>
+        const courses = {
+            'arts': [
+                { 
+                    title: "History",
+                    icon: "📜",
+                    description: "Explore world civilizations and historical events that shaped modern society."
+                },
+                { 
+                    title: "Political Science",
+                    icon: "🏛️",
+                    description: "Understand political systems, theories, and international relations."
+                },
+                { 
+                    title: "Sociology",
+                    icon: "👥",
+                    description: "Study human social relationships and institutions through comprehensive analysis."
+                },
+                { 
+                    title: "Economics",
+                    icon: "💹",
+                    description: "Learn about production, distribution, and consumption of goods and services."
+                },
+                { 
+                    title: "Geography",
+                    icon: "🌍",
+                    description: "Explore Earth's landscapes, peoples, places, and environments."
+                },
+                { 
+                    title: "Psychology",
+                    icon: "🧠",
+                    description: "Understand human behavior and mental processes through scientific study."
+                }
+            ],
+            'commerce': [
+                {
+                    title: "Accountancy",
+                    icon: "📊",
+                    description: "Master financial accounting principles and business transaction recording."
+                },
+                {
+                    title: "Business Studies",
+                    icon: "💼",
+                    description: "Learn business operations, management, and organizational structures."
+                },
+                {
+                    title: "Economics",
+                    icon: "💹",
+                    description: "Study market systems, economic theories, and financial policies."
+                },
+                {
+                    title: "Mathematics",
+                    icon: "🧮",
+                    description: "Develop quantitative skills essential for business analysis."
+                },
+                {
+                    title: "English",
+                    icon: "📖",
+                    description: "Enhance communication skills through literature and language studies."
+                },
+                {
+                    title: "Physical Education",
+                    icon: "🏃",
+                    description: "Maintain physical fitness and learn about sports science."
+                }
+            ],
+            'science': [
+                {
+                    title: "Physics",
+                    icon: "⚛️",
+                    description: "Discover the fundamental laws governing matter and energy."
+                },
+                {
+                    title: "Chemistry",
+                    icon: "🧪",
+                    description: "Study matter composition, properties, and chemical reactions."
+                },
+                {
+                    title: "Biology",
+                    icon: "🧬",
+                    description: "Explore living organisms and vital processes in nature."
+                },
+                {
+                    title: "Mathematics",
+                    icon: "📐",
+                    description: "Develop problem-solving skills through advanced mathematical concepts."
+                },
+                {
+                    title: "Computer Science",
+                    icon: "💻",
+                    description: "Learn programming, algorithms, and computational thinking."
+                },
+                {
+                    title: "English",
+                    icon: "📚",
+                    description: "Enhance critical thinking through literature and composition."
+                },
+                {
+                    title: "Environmental Science",
+                    icon: "🌱",
+                    description: "Understand ecological systems and environmental management."
+                }
+            ]
+        };
+
+        function showCourses(category) {
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Generate course cards
+            const container = document.getElementById('course-container');
+            container.innerHTML = '';
+            
+            courses[category].forEach(course => {
+                const card = document.createElement('div');
+                card.className = 'course-card';
+                card.innerHTML = `
+                    <div class="course-icon">${course.icon}</div>
+                    <h3 class="course-title">${course.title}</h3>
+                    <p class="course-description">${course.description}</p>
+                    <button class="enroll-btn">Enroll Now</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Initial load
+        showCourses('science');
+
+        // Enrollment functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('enroll-btn')) {
+                const courseTitle = e.target.closest('.course-card').querySelector('.course-title').textContent;
+                alert(`Successfully enrolled in ${courseTitle}! Check your email for further instructions.`);
+            }
+        });
+    </script>
+</body>
+</html>
